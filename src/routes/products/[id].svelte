@@ -9,6 +9,7 @@
 
 	export async function load({ params }) {
 		let id = params.id;
+		console.log(id);
 		let product;
 		await client.getEntry(id).then((res) => {
 			const { title, id, price } = res.fields;
