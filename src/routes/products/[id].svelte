@@ -1,5 +1,6 @@
 <script context="module">
 	import * as contentful from 'contentful';
+	import createClient from 'contentful';
 
 	let client = contentful.createClient({
 		space: import.meta.env.VITE_SPACE_ID,
