@@ -26,8 +26,7 @@ __export(stdin_exports, {
 module.exports = __toCommonJS(stdin_exports);
 var import_index_b22a25cc = require("../../immutable/chunks/index-b22a25cc.js");
 var import_contentful = __toESM(require("contentful"));
-const { createClient } = import_contentful.default;
-let client = createClient({
+let client = import_contentful.default.createClient({
   space: "kv8cmmif4onj",
   accessToken: "8U-TVejl8pSQ4_ERo62QNKQHUBnI20_sN02jJ0-EtNE"
 });

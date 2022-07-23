@@ -1,4 +1,4 @@
-<script context="module">
+<!-- <script context="module">
 	import * as contentful from 'contentful';
 
 	let client = contentful.createClient({
@@ -36,4 +36,4 @@
 Detailed product info
 <h1>{product.title}</h1>
 <a href="/">Go home</a>
-<img src={product.imageUrl} alt="" height="300" />
+<img src={product.imageUrl} alt="" height="300" /> -->

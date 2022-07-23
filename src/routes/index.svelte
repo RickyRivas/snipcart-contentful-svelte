@@ -1,35 +1,39 @@
 <script context="module">
-	import contentful from 'contentful';
-	const { createClient } = contentful;
+	// builds correctly but doesnt run in dev environment
+	// import contentful from 'contentful';
+	// const { createClient } = contentful;
 
-	let client = createClient({
-		space: import.meta.env.VITE_SPACE_ID,
-		accessToken: import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN
-	});
+	// works in dev environment but fails to build
+	// import * as contenful from 'contentful';
 
-	export async function load() {
-		let products = [];
-		await client.getEntries().then((res) =>
-			res.items.forEach((item) => {
-				const { title, price } = item.fields;
-				const { id } = item.sys;
-				const product = {
-					title,
-					price,
-					id
-				};
-				products = [...products, product];
-			})
-		);
-		return {
-			props: {
-				products
-			}
-		};
-	}
+	// let client = contentful.createClient({
+	// 	space: import.meta.env.VITE_SPACE_ID,
+	// 	accessToken: import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN
+	// });
+
+	// export async function load() {
+	// 	let products = [];
+	// 	await client.getEntries().then((res) =>
+	// 		res.items.forEach((item) => {
+	// 			const { title, price } = item.fields;
+	// 			const { id } = item.sys;
+	// 			const product = {
+	// 				title,
+	// 				price,
+	// 				id
+	// 			};
+	// 			products = [...products, product];
+	// 		})
+	// 	);
+	// 	return {
+	// 		props: {
+	// 			products
+	// 		}
+	// 	};
+	// }
 </script>
 
-<script>
+<!-- <script>
 	export let products;
 </script>
 
@@ -37,4 +41,4 @@
 	<h1>{product.title}</h1>
 	<p>{product.price}</p>
 	<a href={'/products/' + product.id}>View {product.title}</a>
-{/each}
+{/each} -->
