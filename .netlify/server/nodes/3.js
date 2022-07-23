@@ -27,8 +27,8 @@ __export(stdin_exports, {
   stylesheets: () => stylesheets
 });
 module.exports = __toCommonJS(stdin_exports);
-var module2 = __toESM(require("../entries/pages/product/_id_.svelte.js"));
+var module2 = __toESM(require("../entries/pages/products/_id_.svelte.js"));
 const index = 3;
-const file = "immutable/pages/product/_id_.svelte-3fd4f26e.js";
-const imports = ["immutable/pages/product/_id_.svelte-3fd4f26e.js", "immutable/chunks/index-67f76a52.js"];
+const file = "immutable/pages/products/_id_.svelte-01529003.js";
+const imports = ["immutable/pages/products/_id_.svelte-01529003.js", "immutable/chunks/index-fcbecee5.js", "immutable/chunks/contentful.browser-c1d792fb.js"];
 const stylesheets = [];

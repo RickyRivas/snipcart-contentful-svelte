@@ -24,27 +24,30 @@ __export(stdin_exports, {
   load: () => load
 });
 module.exports = __toCommonJS(stdin_exports);
-var import_index_fea8a638 = require("../../immutable/chunks/index-fea8a638.js");
+var import_index_b22a25cc = require("../../immutable/chunks/index-b22a25cc.js");
 var import_contentful = __toESM(require("contentful"));
-let client = import_contentful.default.createClient({
+const { createClient } = import_contentful.default;
+let client = createClient({
   space: "kv8cmmif4onj",
   accessToken: "8U-TVejl8pSQ4_ERo62QNKQHUBnI20_sN02jJ0-EtNE"
 });
-let products = [];
 async function load() {
+  let products = [];
   await client.getEntries().then((res) => res.items.forEach((item) => {
-    const { title, price, id } = item.fields;
+    const { title, price } = item.fields;
+    const { id } = item.sys;
     const product = { title, price, id };
     products = [...products, product];
-    console.log(products);
   }));
   return { props: { products } };
 }
-const Routes = (0, import_index_fea8a638.c)(($$result, $$props, $$bindings, slots) => {
-  let { products: products2 } = $$props;
-  if ($$props.products === void 0 && $$bindings.products && products2 !== void 0)
-    $$bindings.products(products2);
-  return `${(0, import_index_fea8a638.a)(products2, (product) => {
-    return `<h1>${(0, import_index_fea8a638.e)(product.title)}</h1>`;
+const Routes = (0, import_index_b22a25cc.c)(($$result, $$props, $$bindings, slots) => {
+  let { products } = $$props;
+  if ($$props.products === void 0 && $$bindings.products && products !== void 0)
+    $$bindings.products(products);
+  return `${(0, import_index_b22a25cc.a)(products, (product) => {
+    return `<h1>${(0, import_index_b22a25cc.e)(product.title)}</h1>
+	<p>${(0, import_index_b22a25cc.e)(product.price)}</p>
+	<a${(0, import_index_b22a25cc.b)("href", "/products/" + product.id, 0)}>View ${(0, import_index_b22a25cc.e)(product.title)}</a>`;
   })}`;
 });
