@@ -4,7 +4,7 @@
 
 	let client = contentful.createClient({
 		space: import.meta.env.VITE_SPACE_ID,
-		accessToken: import.meta.env.VITE_CONTENTFUL_SECRET_TOKEN
+		accessToken: import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN
 	});
 
 	export async function load({ params }) {
