@@ -1,37 +1,22 @@
 <script context="module">
-	// let client = contentful.createClient({
-	// 	space: import.meta.env.VITE_SPACE_ID,
-	// 	accessToken: import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN
-	// });
-
-	// export async function load() {
-	// 	let products = [];
-	// 	await client.getEntries().then((res) =>
-	// 		res.items.forEach((item) => {
-	// 			const { title, price } = item.fields;
-	// 			const { id } = item.sys;
-	// 			const product = {
-	// 				title,
-	// 				price,
-	// 				id
-	// 			};
-	// 			products = [...products, product];
-	// 		})
-	// 	);
-	// 	return {
-	// 		props: {
-	// 			products
-	// 		}
-	// 	};
-	// }
+	export async function load() {
+		return {
+			props: {
+				space: import.meta.env.VITE_SPACE_ID,
+				accessToken: import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN
+			}
+		};
+	}
 </script>
 
 <script>
+	export let space, accessToken;
+
 	import { onMount } from 'svelte';
 	onMount(() => {
 		let client = contentful.createClient({
-			space: import.meta.env.VITE_SPACE_ID,
-			accessToken: import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN
+			space: space,
+			accessToken: accessToken
 		});
 
 		let products = [];
