@@ -28,7 +28,7 @@ const manifest = {
   assets: /* @__PURE__ */ new Set(["favicon.png"]),
   mimeTypes: { ".png": "image/png" },
   _: {
-    entry: { "file": "immutable/start-745d8871.js", "imports": ["immutable/start-745d8871.js", "immutable/chunks/index-67f76a52.js"], "stylesheets": [] },
+    entry: { "file": "_app/immutable/start-f6477993.js", "imports": ["_app/immutable/start-f6477993.js", "_app/immutable/chunks/index-451ccc84.js"], "stylesheets": [] },
     nodes: [
       () => Promise.resolve().then(() => __toESM(require("./nodes/0.js"))),
       () => Promise.resolve().then(() => __toESM(require("./nodes/1.js"))),
@@ -54,7 +54,7 @@ const manifest = {
         names: ["id"],
         types: [null],
         path: null,
-        shadow: null,
+        shadow: () => Promise.resolve().then(() => __toESM(require("./entries/endpoints/products/_id_.js"))),
         a: [0, 3],
         b: [1]
       }

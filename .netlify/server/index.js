@@ -42,18 +42,18 @@ __export(stdin_exports, {
   override: () => override
 });
 module.exports = __toCommonJS(stdin_exports);
-var import_index_b22a25cc = require("./immutable/chunks/index-b22a25cc.js");
+var import_index_2435e811 = require("./_app/immutable/chunks/index-2435e811.js");
 var _use_hashes, _script_needs_csp, _style_needs_csp, _directives, _script_src, _style_src, _nonce;
 function afterUpdate() {
 }
-const Root = (0, import_index_b22a25cc.c)(($$result, $$props, $$bindings, slots) => {
+const Root = (0, import_index_2435e811.c)(($$result, $$props, $$bindings, slots) => {
   let { stores } = $$props;
   let { page } = $$props;
   let { components } = $$props;
   let { props_0 = null } = $$props;
   let { props_1 = null } = $$props;
   let { props_2 = null } = $$props;
-  (0, import_index_b22a25cc.s)("__svelte__", stores);
+  (0, import_index_2435e811.s)("__svelte__", stores);
   afterUpdate(stores.page.notify);
   if ($$props.stores === void 0 && $$bindings.stores && stores !== void 0)
     $$bindings.stores(stores);
@@ -73,15 +73,15 @@ const Root = (0, import_index_b22a25cc.c)(($$result, $$props, $$bindings, slots)
   return `
 
 
-${components[1] ? `${(0, import_index_b22a25cc.v)(components[0] || import_index_b22a25cc.m, "svelte:component").$$render($$result, Object.assign(props_0 || {}), {}, {
+${components[1] ? `${(0, import_index_2435e811.v)(components[0] || import_index_2435e811.m, "svelte:component").$$render($$result, Object.assign(props_0 || {}), {}, {
     default: () => {
-      return `${components[2] ? `${(0, import_index_b22a25cc.v)(components[1] || import_index_b22a25cc.m, "svelte:component").$$render($$result, Object.assign(props_1 || {}), {}, {
+      return `${components[2] ? `${(0, import_index_2435e811.v)(components[1] || import_index_2435e811.m, "svelte:component").$$render($$result, Object.assign(props_1 || {}), {}, {
         default: () => {
-          return `${(0, import_index_b22a25cc.v)(components[2] || import_index_b22a25cc.m, "svelte:component").$$render($$result, Object.assign(props_2 || {}), {}, {})}`;
+          return `${(0, import_index_2435e811.v)(components[2] || import_index_2435e811.m, "svelte:component").$$render($$result, Object.assign(props_2 || {}), {}, {})}`;
         }
-      })}` : `${(0, import_index_b22a25cc.v)(components[1] || import_index_b22a25cc.m, "svelte:component").$$render($$result, Object.assign(props_1 || {}), {}, {})}`}`;
+      })}` : `${(0, import_index_2435e811.v)(components[1] || import_index_2435e811.m, "svelte:component").$$render($$result, Object.assign(props_1 || {}), {}, {})}`}`;
     }
-  })}` : `${(0, import_index_b22a25cc.v)(components[0] || import_index_b22a25cc.m, "svelte:component").$$render($$result, Object.assign(props_0 || {}), {}, {})}`}
+  })}` : `${(0, import_index_2435e811.v)(components[0] || import_index_2435e811.m, "svelte:component").$$render($$result, Object.assign(props_0 || {}), {}, {})}`}
 
 ${``}`;
 });
@@ -154,12 +154,6 @@ function lowercase_keys(obj) {
     clone[key2.toLowerCase()] = obj[key2];
   }
   return clone;
-}
-function decode_params(params) {
-  for (const key2 in params) {
-    params[key2] = params[key2].replace(/%23/g, "#").replace(/%3[Bb]/g, ";").replace(/%2[Cc]/g, ",").replace(/%2[Ff]/g, "/").replace(/%3[Ff]/g, "?").replace(/%3[Aa]/g, ":").replace(/%40/g, "@").replace(/%26/g, "&").replace(/%3[Dd]/g, "=").replace(/%2[Bb]/g, "+").replace(/%24/g, "$");
-  }
-  return params;
 }
 function is_pojo(body) {
   if (typeof body !== "object")
@@ -902,6 +896,12 @@ function normalize_path(path, trailing_slash) {
   }
   return path;
 }
+function decode_params(params) {
+  for (const key2 in params) {
+    params[key2] = params[key2].replace(/%23/g, "#").replace(/%3[Bb]/g, ";").replace(/%2[Cc]/g, ",").replace(/%2[Ff]/g, "/").replace(/%3[Ff]/g, "?").replace(/%3[Aa]/g, ":").replace(/%40/g, "@").replace(/%26/g, "&").replace(/%3[Dd]/g, "=").replace(/%2[Bb]/g, "+").replace(/%24/g, "$");
+  }
+  return params;
+}
 class LoadURL extends URL {
   get hash() {
     throw new Error("url.hash is inaccessible from load. Consider accessing hash from the page store within the script tag of your component.");
@@ -931,7 +931,7 @@ async function render_response({
   resolve_opts,
   stuff
 }) {
-  var _a;
+  var _a, _b;
   if (state.prerendering) {
     if (options.csp.mode === "nonce") {
       throw new Error('Cannot use prerendering if config.kit.csp.mode === "nonce"');
@@ -949,7 +949,8 @@ async function render_response({
   let rendered;
   let is_private = false;
   let cache;
-  if (error2) {
+  const stack = error2 == null ? void 0 : error2.stack;
+  if (options.dev && error2) {
     error2.stack = options.get_stack(error2);
   }
   if (resolve_opts.ssr) {
@@ -975,18 +976,12 @@ async function render_response({
       is_private = (_a = cache == null ? void 0 : cache.private) != null ? _a : uses_credentials;
     }
     const session = writable($session);
+    is_private = is_private || ((_b = cache == null ? void 0 : cache.private) != null ? _b : !!$session && Object.keys($session).length > 0);
     const props = {
       stores: {
         page: writable(null),
         navigating: writable(null),
-        session: {
-          ...session,
-          subscribe: (fn) => {
-            var _a2;
-            is_private = (_a2 = cache == null ? void 0 : cache.private) != null ? _a2 : true;
-            return session.subscribe(fn);
-          }
-        },
+        session,
         updated
       },
       page: {
@@ -1109,9 +1104,10 @@ async function render_response({
   }
   const segments = event.url.pathname.slice(options.paths.base.length).split("/").slice(2);
   const assets2 = options.paths.assets || (segments.length > 0 ? segments.map(() => "..").join("/") : ".");
-  const html = await resolve_opts.transformPage({
-    html: options.template({ head, body, assets: assets2, nonce: csp.nonce })
-  });
+  const html = await resolve_opts.transformPageChunk({
+    html: options.template({ head, body, assets: assets2, nonce: csp.nonce }),
+    done: true
+  }) || "";
   const headers = new Headers({
     "content-type": "text/html",
     etag: `"${hash(html)}"`
@@ -1128,6 +1124,9 @@ async function render_response({
     if (report_only_header) {
       headers.set("content-security-policy-report-only", report_only_header);
     }
+  }
+  if (options.dev && error2) {
+    error2.stack = stack;
   }
   return new Response(html, {
     status,
@@ -2233,7 +2232,7 @@ async function respond(request, options, state) {
   });
   let resolve_opts = {
     ssr: true,
-    transformPage: default_transform
+    transformPageChunk: default_transform
   };
   try {
     const response = await options.hooks.handle({
@@ -2241,9 +2240,12 @@ async function respond(request, options, state) {
       resolve: async (event2, opts) => {
         var _a2;
         if (opts) {
+          if (opts.transformPage) {
+            throw new Error("transformPage has been replaced by transformPageChunk \u2014 see https://github.com/sveltejs/kit/pull/5657 for more information");
+          }
           resolve_opts = {
             ssr: opts.ssr !== false,
-            transformPage: opts.transformPage || default_transform
+            transformPageChunk: opts.transformPageChunk || default_transform
           };
         }
         if ((_a2 = state.prerendering) == null ? void 0 : _a2.fallback) {
@@ -2413,7 +2415,7 @@ class Server {
       manifest,
       method_override: { "parameter": "_method", "allowed": [] },
       paths: { base, assets },
-      prefix: assets + "/_app/",
+      prefix: assets + "/",
       prerender: {
         default: false,
         enabled: true
@@ -2432,7 +2434,7 @@ class Server {
       throw new Error("The first argument to server.respond must be a Request object. See https://github.com/sveltejs/kit/pull/3384 for details");
     }
     if (!this.options.hooks) {
-      const module2 = await Promise.resolve().then(() => __toESM(require("./immutable/chunks/hooks-d259abab.js")));
+      const module2 = await Promise.resolve().then(() => __toESM(require("./_app/immutable/chunks/hooks-bced8853.js")));
       this.options.hooks = {
         getSession: module2.getSession || (() => ({})),
         handle: module2.handle || (({ event, resolve: resolve2 }) => resolve2(event)),

@@ -20,7 +20,13 @@ __export(stdin_exports, {
   default: () => U5Bidu5D
 });
 module.exports = __toCommonJS(stdin_exports);
-var import_index_b22a25cc = require("../../../immutable/chunks/index-b22a25cc.js");
-const U5Bidu5D = (0, import_index_b22a25cc.c)(($$result, $$props, $$bindings, slots) => {
-  return ``;
+var import_index_2435e811 = require("../../../_app/immutable/chunks/index-2435e811.js");
+const U5Bidu5D = (0, import_index_2435e811.c)(($$result, $$props, $$bindings, slots) => {
+  let { product } = $$props;
+  if ($$props.product === void 0 && $$bindings.product && product !== void 0)
+    $$bindings.product(product);
+  return `Detailed product info
+<h1>${(0, import_index_2435e811.e)(product.title)}</h1>
+<a href="${"/"}">Go home</a>
+<img${(0, import_index_2435e811.a)("src", product.imageUrl, 0)} alt="${""}" height="${"300"}">`;
 });
