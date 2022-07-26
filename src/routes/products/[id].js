@@ -1,9 +1,9 @@
-// import contentful from 'contentful';
-// const { createClient } = contentful;
+import contentful from 'contentful';
+const { createClient } = contentful;
 
-import * as contentful from 'contentful';
+// import * as contentful from 'contentful';
 
-let client = contentful.createClient({
+let client = createClient({
 	space: import.meta.env.VITE_SPACE_ID,
 	accessToken: import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN
 });
