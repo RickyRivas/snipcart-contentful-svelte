@@ -1,27 +1,19 @@
 <script>
-	import { onMount } from 'svelte';
 	export let response;
+	let item = response;
 	console.log(response);
-	let products = [];
+	const { title, price } = item.fields;
+	const id = item.sys.id;
 
-	onMount(() => {
-		response.items.map((item) => {
-			console.log(item);
-			const { title, id, price } = item.fields;
-			// const imageUrl = 'https:' + item.fields.image.fields.file.url;
-			const prod = {
-				title,
-				id,
-				price
-			};
-			products = [...products, prod];
-		});
-	});
+	const prod = {
+		title,
+		id,
+		price
+	};
 </script>
 
 Detailed product info
-{#each products as product}
-	<h1>{product.title}</h1>
-	<a href="/">Go home</a>
-	<img src={product.imageUrl} alt="" height="300" />
-{/each}
+
+<h1>{prod.title}</h1>
+<a href="/">Go home</a>
+<img src={prod.imageUrl} alt="" height="300" />
