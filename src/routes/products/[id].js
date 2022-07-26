@@ -1,17 +1,31 @@
-const base = 'https://cdn.contentful.com/spaces';
+import contentful from 'contentful';
+const { createClient } = contentful;
 
-let space = import.meta.env.VITE_SPACE_ID;
-let accessToken = import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN;
+let client = createClient({
+	space: import.meta.env.VITE_SPACE_ID,
+	accessToken: import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN
+});
+
 export async function GET({ params }) {
 	let id = params.id;
 
-	const response = await fetch(
-		` https://cdn.contentful.com/spaces/${space}/entries/${id}?access_token=${accessToken}`
-	).then((res) => res.json());
+	let product;
+
+	await client.getEntry(id).then((res) => {
+		const { title, id, price } = res.fields;
+		const imageUrl = 'https:' + res.fields.image.fields.file.url;
+		const prod = {
+			title,
+			id,
+			price,
+			imageUrl
+		};
+		product = prod;
+	});
 
 	return {
 		body: {
-			response
+			product
 		}
 	};
 }

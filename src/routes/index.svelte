@@ -1,39 +1,39 @@
 <script context="module">
-	const base = 'https://cdn.contentful.com/spaces';
+	import * as contentful from 'contentful';
 
-	let space = import.meta.env.VITE_SPACE_ID;
-	let accessToken = import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN;
-	export async function load({ fetch }) {
-		const response = await fetch(`${base}/${space}/entries?access_token=${accessToken}`).then(
-			(res) => res.json()
+	let client = contentful.createClient({
+		space: import.meta.env.VITE_SPACE_ID,
+		accessToken: import.meta.env.VITE_CONTENTFUL_PUBLIC_TOKEN
+	});
+
+	export async function load() {
+		let products = [];
+		await client.getEntries().then((res) =>
+			res.items.forEach((item) => {
+				const { title, price } = item.fields;
+				const { id } = item.sys;
+				const product = {
+					title,
+					price,
+					id
+				};
+				products = [...products, product];
+			})
 		);
-
 		return {
 			props: {
-				response
+				products
 			}
 		};
 	}
 </script>
 
 <script>
-	export let response;
-	let products = [];
-	response.items.map((item) => {
-		const { title, price } = item.fields;
-		const id = item.sys.id;
-
-		const prod = {
-			title,
-			id,
-			price
-		};
-		products = [...products, prod];
-	});
+	export let products;
 </script>
 
-Detailed product info
 {#each products as product}
 	<h1>{product.title}</h1>
 	<a href={'/products/' + product.id}>View</a>
+	<img src={product.imgUrl} alt="" />
 {/each}
