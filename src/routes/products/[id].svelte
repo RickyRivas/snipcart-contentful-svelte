@@ -1,18 +1,21 @@
 <script>
+	import { onMount } from 'svelte';
 	export let response;
 	console.log(response);
 	let products = [];
 
-	response.items.forEach((item) => {
-		console.log(item);
-		const { title, id, price } = item.fields;
-		// const imageUrl = 'https:' + item.fields.image.fields.file.url;
-		const prod = {
-			title,
-			id,
-			price
-		};
-		products = [...products, prod];
+	onMount(() => {
+		response.items.map((item) => {
+			console.log(item);
+			const { title, id, price } = item.fields;
+			// const imageUrl = 'https:' + item.fields.image.fields.file.url;
+			const prod = {
+				title,
+				id,
+				price
+			};
+			products = [...products, prod];
+		});
 	});
 </script>
 
